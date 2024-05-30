@@ -1,0 +1,159 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Customer {
+  id           String       @id @default(uuid()) @db.Uuid
+  customerName String
+  contactName  String
+  contactPhone String
+  contactEmail String
+  address      String?
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+  salesOrders  SalesOrder[]
+}
+
+model Employee {
+  id               String            @id @default(uuid()) @db.Uuid
+  firstName        String
+  lastName         String
+  role             String
+  department       String
+  hireDate         DateTime
+  salary           Float
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+  productionOrders ProductionOrder[]
+}
+
+model FinancialTransaction {
+  id              String   @id @default(uuid()) @db.Uuid
+  transactionDate DateTime
+  amount          Float
+  transactionType String
+  description     String?
+  referenceId     String
+  referenceType   String
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model InventoryTransaction {
+  id              String       @id @default(uuid()) @db.Uuid
+  productId       String?      @db.Uuid
+  materialId      String?      @db.Uuid
+  quantity        Int
+  transactionType String
+  transactionDate DateTime
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @default(now())
+  product         Product?     @relation(fields: [productId], references: [id])
+  material        RawMaterial? @relation(fields: [materialId], references: [id])
+}
+
+model Product {
+  id                    String                 @id @default(uuid()) @db.Uuid
+  productName           String
+  description           String?
+  quantityInStock       Int
+  unitPrice             Float
+  createdAt             DateTime               @default(now())
+  updatedAt             DateTime               @updatedAt
+  inventoryTransactions InventoryTransaction[]
+  salesOrderDetails     SalesOrderDetail[]
+  productionOrders      ProductionOrder[]
+}
+
+model ProductionOrder {
+  id         String   @id @default(uuid()) @db.Uuid
+  productId  String   @db.Uuid
+  orderDate  DateTime
+  quantity   Int
+  status     String
+  employeeId String   @db.Uuid
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  product    Product  @relation(fields: [productId], references: [id])
+  employee   Employee @relation(fields: [employeeId], references: [id])
+}
+
+model PurchaseOrder {
+  id                   String                @id @default(uuid()) @db.Uuid
+  supplierId           String                @db.Uuid
+  orderDate            DateTime
+  totalAmount          Float
+  status               String
+  createdAt            DateTime              @default(now())
+  updatedAt            DateTime              @updatedAt
+  supplier             Supplier              @relation(fields: [supplierId], references: [id])
+  purchaseOrderDetails PurchaseOrderDetail[]
+}
+
+model PurchaseOrderDetail {
+  id              String        @id @default(uuid()) @db.Uuid
+  purchaseOrderId String        @db.Uuid
+  materialId      String        @db.Uuid
+  quantity        Int
+  unitPrice       Float
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  purchaseOrder   PurchaseOrder @relation(fields: [purchaseOrderId], references: [id])
+  material        RawMaterial   @relation(fields: [materialId], references: [id])
+}
+
+model RawMaterial {
+  id                    String                 @id @default(uuid()) @db.Uuid
+  materialName          String
+  description           String?
+  quantityInStock       Int
+  unitPrice             Float
+  supplierId            String                 @db.Uuid
+  createdAt             DateTime               @default(now())
+  updatedAt             DateTime               @updatedAt
+  supplier              Supplier               @relation(fields: [supplierId], references: [id])
+  inventoryTransactions InventoryTransaction[]
+  purchaseOrderDetails  PurchaseOrderDetail[]
+}
+
+model SalesOrder {
+  id                String             @id @default(uuid()) @db.Uuid
+  customerId        String             @db.Uuid
+  orderDate         DateTime
+  totalAmount       Float
+  status            String
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+  customer          Customer           @relation(fields: [customerId], references: [id])
+  salesOrderDetails SalesOrderDetail[]
+}
+
+model SalesOrderDetail {
+  id           String     @id @default(uuid()) @db.Uuid
+  salesOrderId String     @db.Uuid
+  productId    String     @db.Uuid
+  quantity     Int
+  unitPrice    Float
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  salesOrder   SalesOrder @relation(fields: [salesOrderId], references: [id])
+  product      Product    @relation(fields: [productId], references: [id])
+}
+
+model Supplier {
+  id             String          @id @default(uuid()) @db.Uuid
+  supplierName   String
+  contactName    String
+  contactPhone   String
+  contactEmail   String
+  address        String?
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  rawMaterials   RawMaterial[]
+  purchaseOrders PurchaseOrder[]
+}
