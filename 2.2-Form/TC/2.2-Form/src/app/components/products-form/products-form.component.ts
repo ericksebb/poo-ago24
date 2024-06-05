@@ -14,11 +14,10 @@ import {NzButtonComponent} from "ng-zorro-antd/button";
 import {ApiService} from "../../services/api.service";
 import {NzInputNumberComponent} from "ng-zorro-antd/input-number";
 import {NzNotificationService} from "ng-zorro-antd/notification";
-import { Validators as MyValidators } from '@angular/forms';
+import { Validators as MyValidators} from '@angular/forms';
 
 
 @Component({
-  selector: 'app-products-form',
   standalone: true,
   imports: [
     NzFormItemComponent,
@@ -32,57 +31,54 @@ import { Validators as MyValidators } from '@angular/forms';
     NzButtonComponent,
     NzInputNumberComponent
   ],
+  selector: 'app-products-form',
   templateUrl: './products-form.component.html',
-  styleUrl: './products-form.component.css'
+  styleUrls: ['./products-form.component.css']
 })
 export class ProductsFormComponent {
-  validFormProduct: FormGroup<{
-    producName: FormControl<string>;
+  productForm: FormGroup<{
+    productName: FormControl<string>;
     description: FormControl<string>;
     quantityInStock: FormControl<number>;
     unitPrice: FormControl<number>;
-    createdAt: FormControl<Date | null>;
-    updatedAt: FormControl<Date>;
   }>;
 
-  submitFormProduct(): void {
-    if (this.validFormProduct.valid) {
-      console.log('submit', this.validFormProduct.value);
-        this.apiService.create(this.validFormProduct.value).subscribe(() => {
-          this.createNotification('success', `${this.validFormProduct.value.producName}` ,"product has been created successfully!")
-      this.validFormProduct.reset();
+  submitForm(): void{
+    if (this.productForm.valid) {
+      console.log('submit', this.productForm.value);
+        this.apiService.create(this.productForm.value).subscribe(() => {
+          this.createNotification('success', `${this.productForm.value.productName}` ,"Product has been created successfully!")
+      this.productForm.reset();
         }
       );
     } else {
-      Object.values(this.validFormProduct.controls).forEach(control => {
+      Object.values(this.productForm.controls).forEach(control => {
         if (control.invalid) {
           control.markAsDirty();
           control.updateValueAndValidity({ onlySelf: true });
         }
       });
     }
-  }
-
-  createNotification(type: string, title:string,  message: string): void {
-    this.notification.create(
-      type,
-      title,message
-    );
-  }
-
+    }
+    
+    createNotification(type: string, title: string, message: string): void {
+      this.notification.create(
+        type,
+        title,
+        message
+      );
+    }
   constructor(
-    private fb: NonNullableFormBuilder,
     private apiService: ApiService,
-    private notification: NzNotificationService
+    private notification: NzNotificationService,
+    private fb: NonNullableFormBuilder
   ) {
-    const { required } = MyValidators;
-    this.validFormProduct = this.fb.group({
-      producName: ['', [required]],
+    const {required} = MyValidators;
+    this.productForm = this.fb.group({
+      productName: ['', [required]],
       description: ['', [required]],
-      quantityInStock: [0, [required]],
+      quantityInStock: [0, [required]], // Change the type of quantityInStock to FormControl<number>
       unitPrice: [0, [required]],
-      createdAt: this.fb.control<Date | null>(null),
-      updatedAt: this.fb.control<Date>(new Date())
     });
-  }
+  }  
 }

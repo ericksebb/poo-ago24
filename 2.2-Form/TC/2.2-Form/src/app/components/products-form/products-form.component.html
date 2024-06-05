@@ -1,34 +1,34 @@
 <h1>Products</h1>
 
-<form nz-form [formGroup]="validFormProduct" (ngSubmit)="submitFormProduct()">
-  <nz-form-item>
-    <nz-form-label [nzSpan]="7" nzRequired>Product Name</nz-form-label>
-    <nz-form-control [nzSpan]="12">
-      <input nz-input formControlName="productName" placeholder="Pollo" />
-    </nz-form-control>
-  </nz-form-item>
-  <nz-form-item>
-    <nz-form-label [nzSpan]="7" nzRequired>Description</nz-form-label>
-    <nz-form-control [nzSpan]="12">
-      <input nz-input formControlName="description" placeholder="Pollo XD?" />
-    </nz-form-control>
-  </nz-form-item>
-  <nz-form-item>
-    <nz-form-label [nzSpan]="7" nzRequired>In Stock</nz-form-label>
-    <nz-form-control [nzSpan]="12">
-      <input nz-input formControlName="quantityInStock" placeholder="infinite" />
-    </nz-form-control>
-  </nz-form-item>
-  <nz-form-item>
-    <nz-form-label [nzSpan]="7" nzRequired>Price per unit</nz-form-label>
-    <nz-form-control [nzSpan]="12">
-      <input nz-input formControlName="unitPrice" placeholder="Prob billions" />
-    </nz-form-control>
-  </nz-form-item>
-  <nz-form-item>
-    <nz-form-control [nzXs]="{ span: 24, offset: 0 }" [nzSm]="{ span: 16, offset: 8 }">
-      <button nz-button nzType="primary">Submit</button>
-    </nz-form-control>
-  </nz-form-item>
-
-</form>
+<form nz-form [formGroup]="productForm" (ngSubmit)="submitForm()">
+    <nz-form-item>
+      <nz-form-label [nzSpan]="7" nzRequired>Product Name</nz-form-label>
+      <nz-form-control [nzSpan]="12">
+        <input nz-input formControlName="productName" placeholder="Product Name" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="7" nzRequired>Description</nz-form-label>
+      <nz-form-control [nzSpan]="12">
+        <input nz-input formControlName="description" placeholder="Description" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="7" nzRequired>Quantity in Stock</nz-form-label>
+      <nz-form-control [nzSpan]="12">
+        <nz-input-number nz-input formControlName="quantityInStock" [nzMin]="0" [nzMax]="100000" [nzStep]="100" placeholder="Quantity in Stock" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="7" nzRequired>Unit Price</nz-form-label>
+      <nz-form-control [nzSpan]="12">
+        <nz-input-number nz-input formControlName="unitPrice" [nzMin]="0" [nzMax]="100000" [nzStep]="100" placeholder="Unit Price" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control [nzXs]="{ span: 24, offset: 0 }" [nzSm]="{ span: 16, offset: 8 }">
+        <button nz-button nzType="primary">Submit</button>
+      </nz-form-control>
+    </nz-form-item>
+  
+  </form>
