@@ -14,16 +14,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have the 'angular-front' title`, () => {
+  it(`should have the 'consume-api-spotify' title`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('angular-front');
+    expect(app.title).toEqual('consume-api-spotify');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, angular-front');
+    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, consume-api-spotify');
   });
 });

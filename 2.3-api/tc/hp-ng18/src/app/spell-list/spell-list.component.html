@@ -1,0 +1,10 @@
+<div *ngIf="spells.length > 0">
+    <ul>
+      <li *ngFor="let spell of spells">
+        {{ spell.name }}: {{ spell.description }}
+      </li>
+    </ul>
+  </div>
+  <div *ngIf="spells.length === 0">
+    Loading...
+  </div>  

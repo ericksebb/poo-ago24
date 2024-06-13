@@ -1,0 +1,28 @@
+<!-- <ul>
+    @for (post of spells; track post.id) {
+        <li>
+            <h1>
+                {{post.title}}
+            </h1>
+            <p>{{post.body}}</p>
+        </li>
+    }
+</ul>
+
+<ul>
+    <li *ngFor="let spell of spells">
+        <h1>{{ spell.name }}</h1>
+        <p>{{ spell.description }}</p>
+    </li>
+</ul>
+ -->
+<body>
+ <div *ngFor="let spell of spells" class="spell">
+    <h1>{{ spell.name }}</h1>
+    <p>{{ spell.description }}</p>
+  </div>
+</body>
+<div *ngIf="spells.length === 0" class="loading">
+    <h1>Loading...</h1>
+</div>
+  

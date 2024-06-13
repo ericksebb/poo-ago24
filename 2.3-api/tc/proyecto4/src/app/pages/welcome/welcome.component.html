@@ -1,0 +1,26 @@
+<nz-table #basicTable [nzData]="catBreeds">
+  <thead>
+    <tr>
+      <th>Breed</th>
+      <th>Country</th>
+      <th>Origin</th>
+      <th>Coat</th>
+      <th>Pattern</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let breed of basicTable.data">
+      <td>{{ breed.breed }}</td>
+      <td>{{ breed.country }}</td>
+      <td>{{ breed.origin }}</td>
+      <td>{{ breed.coat }}</td>
+      <td>{{ breed.pattern }}</td>
+      <td>
+        <a>Action 一 {{ breed.breed }}</a>
+        <nz-divider nzType="vertical"></nz-divider>
+        <a>Delete</a>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>
