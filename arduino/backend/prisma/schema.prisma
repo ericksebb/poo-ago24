@@ -12,11 +12,9 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
-
-model sensor {
-  id              Int      @id @default(autoincrement())
-  name            String   
-  isActive        Boolean  @default(false)
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
-}   
+model register {
+  id        Int      @id @default(autoincrement())
+  sensor_id Int      
+  name      String     
+  createdAt DateTime @default(now())
+}

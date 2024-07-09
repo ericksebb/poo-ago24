@@ -1,5 +1,5 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { FridgesService } from './fridges.service';
+/* import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+// import { FridgesService } from './fridges.service';
 import { CreateFridgeDto } from './dto/create-fridge.dto';
 import { UpdateFridgeDto } from './dto/update-fridge.dto';
 import { ApiTags } from '@nestjs/swagger';
@@ -28,8 +28,8 @@ export class FridgesController {
  /*  @Get('discontinued')
   findAllDiscontinued() {
     return this.fridgesService.findAllDiscontinued();
-  } */
-
+  }
+    
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateFridgeDto: UpdateFridgeDto) {
     return this.fridgesService.update(+id, updateFridgeDto);
@@ -40,3 +40,4 @@ export class FridgesController {
     return this.fridgesService.remove(+id);
   }
 }
+ */

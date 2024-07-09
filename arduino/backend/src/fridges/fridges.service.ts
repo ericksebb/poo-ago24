@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+/* import { Injectable } from '@nestjs/common';
 import { CreateFridgeDto } from './dto/create-fridge.dto';
 import { UpdateFridgeDto } from './dto/update-fridge.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
@@ -25,7 +25,7 @@ export class FridgesService {
 /*   findAllDiscontinued() {
     return this.prisma.fridge.findMany({where: {isDiscontinued: true}});
   }
- */
+ 
   update(id: number, updateFridgeDto: UpdateFridgeDto) {
     return this.prisma.fridge.update({
       where: { id },
@@ -39,3 +39,4 @@ export class FridgesService {
   }
 
 }
+ */

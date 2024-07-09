@@ -3,11 +3,11 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 async function main() {
-    await prisma.sensor.createMany({
+    await prisma.register.createMany({
         data: [
-            { name: 'Sensor 1', isActive: true },
-            { name: 'Sensor 2', isActive: false },
-            { name: 'Sensor 3', isActive: true },
+            {sensor_id: 1, name: "Kitchen", createdAt: new Date()},
+            {sensor_id: 2, name: "Living Room", createdAt: new Date()},
+            {sensor_id: 3, name: "Bedroom", createdAt: new Date()},
         ]
     });
 
