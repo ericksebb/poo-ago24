@@ -57,17 +57,39 @@ $ yarn run test:e2e
 # test coverage
 $ yarn run test:cov
 ```
+## Usage
+
+
+## FAQ
+
+Sorry, I'm lazy af to write a lot of text for this part of the documentation, but here are some questions that might be asked:
+
+#### How do I connect this project to a database?
+
+First, make sure you have replicated the steps back in [Installation](#installation) as this will install all node packages and binaries used <i>(including Prisma ORM, which is essential to this project)</i>.
+
+
+##### If you have your database:
+
+Create an `.env` file in the root folder and inside add the link given by your provider in the following format:
+```sh
+# /.env
+# 
+DATABASE_URL: "postgresql://user:password@host:port/database
+```
+
+<b>IMPORTANT:</b> I've used PostgreSQL as my database provider and honestly don't know if my `schema.prisma` supports your database, you can read the documentation for 
+
+
 
 ## Support
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+This project has been created with experimental purposes, <b>DO NOT USE IN PROFESIONAL ENVIRONMENTS AS IT MAY HAVE SECURITY LEAKS OR MAY END IN ARMAGEDDON</b>, this product <b>will not</b> receive updates by the official developers, if you want to contribute, do your own fork and start programming as needed, alas, we've done the backend in less than 2 hours.
 
 ## Stay in touch
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+You know what? We're hiring (or not)
 
 ## License
 
-Nest is [MIT licensed](LICENSE).
+Nest is [MIT licensed](LICENSE). As well as the project created using this framework

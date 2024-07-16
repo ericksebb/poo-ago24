@@ -1,12 +1,16 @@
-import { IsAlphanumeric } from "class-validator";
+import { IsAlphanumeric, IsNumber } from "class-validator";
 import { ApiProperty } from "@nestjs/swagger";
 
 export class CreateRegisterDto {
     @ApiProperty()
     @IsAlphanumeric()
-    name: string;
+    sensor_id: number;
 
     @ApiProperty()
-    sensor_id: number;
+    @IsAlphanumeric()
+    room_id: number;
     
+    @ApiProperty()
+    @IsAlphanumeric()
+    location: string;
 }
