@@ -23,7 +23,7 @@ datasource db {
 //}
 
 model sensor {
-  id                    Int     @id @default(autoincrement())
+  id                    Int     @id @unique @default(autoincrement())
   model                 String
   make                  String
   type                  String
@@ -31,14 +31,14 @@ model sensor {
   register register[]
 }
 model room {
-  id                    Int     @id @default(autoincrement())
+  id                    Int     @id @unique @default(autoincrement())
   name                  String  @unique
   size                  String
   registers register[]
 }
 
 model register {
-  id                     Int      @id @default(autoincrement())
+  id                     Int      @id @unique @default(autoincrement())
   sensor_id              Int 
   room_id                Int
   location               String

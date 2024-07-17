@@ -1,26 +1,37 @@
 import { Injectable } from '@nestjs/common';
 import { CreateSensorDto } from './dto/create-sensor.dto';
 import { UpdateSensorDto } from './dto/update-sensor.dto';
+import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class SensorsService {
+  constructor (private prisma: PrismaService) {}
   create(createSensorDto: CreateSensorDto) {
-    return 'This action adds a new sensor';
+    return this.prisma.sensor.create({data: createSensorDto});
   }
 
   findAll() {
-    return `This action returns all sensors`;
+    return this.prisma.sensor.findMany();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} sensor`;
+    return this.prisma.sensor.findUnique({where: {id}});
+  }
+
+  findMany(type: string) {
+    return this.prisma.sensor.findMany({where: {type}});
   }
 
   update(id: number, updateSensorDto: UpdateSensorDto) {
-    return `This action updates a #${id} sensor`;
+    return this.prisma.sensor.update({
+      where: {id},
+      data: updateSensorDto
+    });
   }
 
   remove(id: number) {
-    return `This action removes a #${id} sensor`;
+    return this.prisma.sensor.delete({
+      where: {id}
+    });
   }
 }

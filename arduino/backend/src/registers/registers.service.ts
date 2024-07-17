@@ -12,17 +12,34 @@ export class RegistersService {
   }
 
   findAll() {
-    return this.prisma.register.findMany();
+    return this.prisma.register.findMany({
+      include: {
+        room: true,
+        sensor: true
+      }
+    });
   }
 
   findOne(id: number) {
     return this.prisma.register.findUnique({where: {id}});
   }
+  findAllRoom(room_id: number){
+    return this.prisma.register.findMany({
+      where: {
+        room_id: room_id},
+      include: {
+        room: true,
+        sensor: true
+      }
+    })
+  }
 
-  /* update(id: number, updateRegisterDto: UpdateRegisterDto) {
+/* 
+  update(id: number, updateRegisterDto: UpdateRegisterDto) {
     return `This action updates a #${id} register`;
   }
- */
+*/
+
   remove(id: number) {
     return this.prisma.register.delete({where: {id}});
   }
