@@ -18,22 +18,22 @@ import {Observable} from "rxjs";
   getAllRegisters<T>(): Observable<T[]> {
     return this.http.get<T[]>(`${this.url}/registers`);
   }
+//
+ // getRegistersByRoom<T>(room_id: number): Observable<T> {
+ //   return this.http.get<T>(`${this.url}/registers/from-room/${room_id}`);
+ // }
+//
+ // getRegistersById<T>(id: number): Observable<T> {
+ //   return this.http.get<T>(`${this.url}/registers/${id}`);
+ // }
+//
+//  createRegister<T>(item: T): Observable<T> {
+//    return this.http.post<T>(`${this.url}/registers`, item);
+//  }
 
-  getRegistersByRoom<T>(room_id: number): Observable<T> {
-    return this.http.get<T>(`${this.url}/registers/from-room/${room_id}`);
-  }
-
-  getRegistersById<T>(id: number): Observable<T> {
-    return this.http.get<T>(`${this.url}/registers/${id}`);
-  }
-
-  createRegister<T>(item: T): Observable<T> {
-    return this.http.post<T>(`${this.url}/registers`, item);
-  }
-
-  deleteRegister(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.url}/registers/${id}`);
-  }
+  //deleteRegister(id: number): Observable<void> {
+  //  return this.http.delete<void>(`${this.url}/registers/${id}`);
+  //}
 
   //  CRUD endpoints for rooms
 
@@ -55,21 +55,7 @@ import {Observable} from "rxjs";
 
   //  CRUD endpoints for sensors
 
-  getAllSensors<T>(id: number): Observable<T[]> {
-    return this.http.get<T[]>(`${this.url}/sensors`);
-  }
-  getSensor<T>(id: number): Observable<T> {
-    return this.http.get<T>(`${this.url}/sensors/${id}`);
-  }
-  createSensor<T>(item: T): Observable<T> {
-    return this.http.post<T>(`${this.url}/sensors`, item);
-  }
-  patchSensor<T>(id: number, item: T) {
-    return this.http.patch<T>(`${this.url}/sensors/${id}`, item);
-  }
-  deleteSensor<T>(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.url}/sensors/${id}`);
-  }
+  
 
 /*
   getAllRegisters<T>(): Observable<T[]> {

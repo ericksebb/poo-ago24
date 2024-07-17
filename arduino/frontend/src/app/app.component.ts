@@ -17,9 +17,6 @@ import { HttpClientModule } from '@angular/common/http';
     RouterOutlet,
     FormsModule,
     ReactiveFormsModule,
-    FormBuilder,
-    FormGroup,
-    Validators,
     NzTableModule,
     NzFormModule,
     NzInputModule,
@@ -29,7 +26,13 @@ import { HttpClientModule } from '@angular/common/http';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements NgOnInit{
+export class AppComponent implements OnInit {
+  title = 'frontend';
+  constructor() { }
+  ngOnInit() {
+  }
+
+  
 }
 
 
