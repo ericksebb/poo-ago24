@@ -1,55 +1,90 @@
-<nz-layout class="app-layout">
-  <nz-sider class="menu-sidebar"
-    nzCollapsible
-    nzWidth="256px"
-    nzBreakpoint="md"
-    [(nzCollapsed)]="isCollapsed"
-    [nzTrigger]="null">
-    <div class="sidebar-logo">
-      <a href="https://ng.ant.design/" target="_blank">
-        <img src="https://www.vhv.rs/dpng/d/513-5137033_logo-indurama-png-transparent-png.png" alt="logo">
-        <h1>Ant design do Indurama</h1>
-      </a>
+<!--
+ NG-ZORRO
+<a href="https://github.com/NG-ZORRO/ng-zorro-antd" target="_blank" style="display: flex;align-items: center;justify-content: center;height: 100%;width: 100%;">
+  <img height="300" src="https://img.alicdn.com/tfs/TB1X.qJJgHqK1RjSZFgXXa7JXXa-89-131.svg" alt="these nutz">
+</a>
+-->
+<h1>Gestión de Basureros</h1>
+<img src='https://img.freepik.com/vector-gratis/ilustracion-icono-cubo-basura_53876-5598.jpg?w=826&t=st=1720246432~exp=1720247032~hmac=4ff747077824debf50608436ab48f8bd28de514ddfd2f6c10e54f68259181bf6' width="100" height="100">
+
+<div *ngIf="messageService.message()">
+  <div [ngClass]="{
+        'message': true,
+        'success': messageService.message()?.type === 'success',
+        'error': messageService.message()?.type === 'error',
+        'info': messageService.message()?.type === 'info'
+      }">
+    {{ messageService.message()?.content }}
+  </div>
+</div>
+
+<nz-table #basicTable [nzData]="basureros">
+  <thead>
+  <tr>
+    <th>Nombre</th>
+    <th>Ubicación</th>
+    <th>Encargado</th>
+    <th>Capacidad</th>
+    <th>Acciones</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of basicTable.data">
+    <td>{{ data.name }}</td>
+    <td>{{ data.location }}</td>
+    <td>{{ data.incharge }}</td>
+    <td>{{ data.capacity }}</td>
+    <td>
+      <button nz-button (click)="editBasurero(data)">Editar</button>
+      <button nz-button nzDanger (click)="deleteBasurero(data)">Eliminar</button>
+    </td>
+  </tr>
+  </tbody>
+</nz-table>
+
+<h2>{{ editMode ? 'Editar Basurero' : 'Agregar Basurero' }}</h2>
+<form [formGroup]="basureroForm" (ngSubmit)="onSubmit()">
+  <div nz-form-item>
+    <div nz-form-label>
+      <label for="name">Nombre</label>
     </div>
-    <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-      <li nz-submenu nzOpen nzTitle="Dashboard" nzIcon="dashboard">
-        <ul>
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/welcome">Welcome</a>
-          </li>
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/fridges">Monitor</a>
-          </li>
-          <li nz-menu-item nzMatchRouter>
-            <a>Workplace</a>
-          </li>
-        </ul>
-      </li>
-      <li nz-submenu nzOpen nzTitle="Form" nzIcon="form">
-        <ul>
-          <li nz-menu-item nzMatchRouter>
-            <a>Basic Form</a>
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </nz-sider>
-  <nz-layout>
-    <nz-header>
-      <div class="app-header">
-        <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
-            <span class="trigger"
-               nz-icon
-               [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
-            ></span>
-        </span>
-      </div>
-    </nz-header>
-    <nz-content>
-      <div class="inner-content">
-        <!-- <router-outlet></router-outlet> -->
-         <app-fridges></app-fridges>
-      </div>
-    </nz-content>
-  </nz-layout>
-</nz-layout>
+    <div nz-form-control>
+      <input nz-input id="name" formControlName="name" required>
+    </div>
+  </div>
+
+  <div nz-form-item>
+    <div nz-form-label>
+      <label for="location">Ubicación</label>
+    </div>
+    <div nz-form-control>
+      <input nz-input id="location" formControlName="location" required>
+    </div>
+  </div>
+
+  <div nz-form-item>
+    <div nz-form-label>
+      <label for="incharge">Encargado</label>
+    </div>
+    <div nz-form-control>
+      <input nz-input id="incharge" formControlName="incharge" required>
+    </div>
+  </div>
+
+  <div nz-form-item>
+    <div nz-form-label>
+      <label for="capacity">Capacidad</label>
+    </div>
+    <div nz-form-control>
+      <input nz-input id="capacity" formControlName="capacity" required>
+    </div>
+  </div>
+
+  <div nz-form-item>
+    <div nz-form-control>
+      <button nz-button nzType="primary" type="submit" [disabled]="basureroForm.invalid">
+        {{ editMode ? 'Actualizar' : 'Agregar' }}
+      </button>
+    </div>
+  </div>
+</form>
